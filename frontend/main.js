@@ -2,22 +2,19 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const axios = require('axios');
 const fs = require('fs');
-
-process.on('uncaughtException', function (err) {
-    console.log(err);
-});
-
-
 function createWindow() {
     const win = new BrowserWindow({
         width: 1000,
         height: 600,
+        setMenuBarVisibility: null,
         webPreferences: {
             contextIsolation: true,
             nodeIntegration: true,
             preload: path.join(__dirname, 'preload.js'),
         },
     });
+
+    win.setMenuBarVisibility(null);
 
 
     win.loadFile(path.join(__dirname, 'index.html'));
