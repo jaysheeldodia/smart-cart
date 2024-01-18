@@ -7,9 +7,10 @@
     <script src="js/renderer.js" defer></script>
 </head>
 <body>
-    <input type="file" id="fileInput" />
-    <button id="uploadFileButton" onclick="uploadFile()">Upload</button>
-
+    <form id="uploadForm">
+        <input type="file" id="fileInput" />
+        <button type="submit">Upload</button>
+      </form>
     <!-- <script>
         const { ipcRenderer } = require('electron');
 

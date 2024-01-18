@@ -35,6 +35,13 @@ app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit();
 });
 
+ipcMain.on("fileUploaded", async(event, data) => {
+    console.log(data)
+})
+
+ipcMain.on("fileUploadError", async(event, message) => {
+    console.log(message)
+})
 
 ipcMain.on('upload-file', async (event, { filename, data }) => {
     try {
@@ -47,26 +54,26 @@ ipcMain.on('upload-file', async (event, { filename, data }) => {
         // Call the FastAPI server
         // const response = await axios.post('http://localhost:8000/uploadfile/', { filename, filePath });
         console.log("reached here")
-        axios({
-            method: "get",
-            url: "http://127.0.0.1:8000/",
-            
-        }).then(function (response) {
-            console.log(response.data);
-        });
-
         // axios({
-        //     method: 'post',
-        //     url: 'http://localhost:8000/uploadfile/',
-        //     data: {
-        //         filename: filename,
-        //         filePath: filePath
-        //     }
+        //     method: "get",
+        //     url: "http://127.0.0.1:8000/",
+            
         // }).then(function (response) {
         //     console.log(response.data);
-        // }).catch(function (error) {
-        //     console.error(error.message);
         // });
+
+        axios({
+            method: 'post',
+            url: 'http://localhost:8000/uploadfile/',
+            data: {
+                filename: filename,
+                filePath: filePath
+            }
+        }).then(function (response) {
+            console.log(response.data);
+        }).catch(function (error) {
+            console.error(error.message);
+        });
 
 
         console.log("reach here")

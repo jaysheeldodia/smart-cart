@@ -1,7 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-import os
+import os, shutil
 from ultralytics import YOLO
 from PIL import Image
 from pyzbar.pyzbar import decode
@@ -53,22 +53,19 @@ async def root():
     return ({'data':'hello'})
 
 @app.post("/uploadfile/")
-async def create_upload_file(filename: str, filePath: str):
+async def create_upload_file(file: UploadFile = File(...)):
     try:
-        # Save the file to the specified filePath
-        with open(filePath, "wb") as f:
-            f.write(filename)
+        # Save the uploaded file
+        uploaded_file_path = Path("uploads") / file.filename
+        with open(uploaded_file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
 
-        # Call the process function with the filename
-        process_image(filename)
+        # Process the saved file
+        process_image(uploaded_file_path)
 
-        return JSONResponse(content={"message": "File uploaded successfully"}, status_code=200)
-
+        return JSONResponse(content={"message": "fileuploaded"})
     except Exception as e:
         return JSONResponse(content={"message": str(e)}, status_code=500)
-    finally:
-        # Cleanup: remove the uploaded file
-        os.remove(filePath)
 
 if __name__ == "__main__":
     import uvicorn
