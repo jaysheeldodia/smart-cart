@@ -1,5 +1,5 @@
 backend/Barcode_Dataset_750_Images
-backend/venv
+backend\__pycache__
 backend/Barcode_Dataset_215_images.zip
 backend/Barcode_Dataset_750_images.zip
 frontend/node_modules
