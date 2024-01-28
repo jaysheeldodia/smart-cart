@@ -30,7 +30,7 @@ To run the Frontend, follow these steps:
 
 This will launch the application, and you should be able to access it in your web browser at [http://localhost:3000](http://localhost:3000).
 
-To run the Frontend, follow these steps:
+To run the Backend, follow these steps:
 
 1. System Requirements
 
