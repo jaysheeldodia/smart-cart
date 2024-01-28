@@ -1,12 +1,9 @@
-import os, shutil
+import os
 from ultralytics import YOLO
 from PIL import Image
 from pyzbar.pyzbar import decode
-from pathlib import Path
 from flask import Flask, render_template, request, jsonify
 from PIL import Image
-from io import BytesIO
-import base64
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'saved'
@@ -14,16 +11,12 @@ model = YOLO("best (2).pt")
 
 def run_scanner(image):
     try:
-        # Your custom logic here
-        # For demonstration purposes, let's just convert the image to grayscale
         data = decode(image)[0][0].decode('utf-8')
         return data
     except:
         return None
 
 def process_image(filename: str):
-    # Add your image processing logic here
-    # For demonstration purposes, let's just print the filename
     filename = filename
     result = model.predict(filename)[0]
     names = model.names

@@ -1,6 +1,7 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const fs = require('fs');
+
 function createWindow() {
     const win = new BrowserWindow({
         width: 1000,
@@ -30,25 +31,3 @@ app.whenReady().then(() => {
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit();
 });
-
-ipcMain.on("fileUploaded", async(event, data) => {
-    console.log(data)
-})
-
-ipcMain.on("fileUploadError", async(event, message) => {
-    console.log(message)
-})
-
-ipcMain.on('upload-file', async (event, { filename, data }) => {
-    try {
-        // Decode base64 data and write it to a file
-        const decodedData = Buffer.from(data, 'base64');
-        const filePath = path.join(app.getPath('temp'), filename);
-
-        fs.writeFileSync(filePath, decodedData);
-       
-    } catch (error) {
-        console.error(error.message);
-    }
-});
-
