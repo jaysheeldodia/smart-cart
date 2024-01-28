@@ -30,6 +30,22 @@ To run the Frontend, follow these steps:
 
 This will launch the application, and you should be able to access it in your web browser at [http://localhost:3000](http://localhost:3000).
 
+To run the Frontend, follow these steps:
+
+1. System Requirements
+
+    ```bash
+    sudo apt-get update && apt-get upgrade
+    sudo apt-get install -y build-essential libzbar-dev
+    sudo apt install python3-zbar
+    ```
+
+2. Pyzbar
+
+    ```bash
+    pip install pyzbar
+    ```
+
 ## Additional Information
 
 - Make sure you have Node.js and npm installed on your machine before running the application. You can download them from [https://nodejs.org/](https://nodejs.org/).
